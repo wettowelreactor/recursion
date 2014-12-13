@@ -9,6 +9,8 @@ var stringifyJSON = function(obj) {
 
   if (obj === undefined || typeof(obj) === 'function') {
     throw new SyntaxError("invalid JSON");
+  } else if (obj === null) {
+    return 'null';
   } else if (Array.isArray(obj)) {
     result = '[';
 
