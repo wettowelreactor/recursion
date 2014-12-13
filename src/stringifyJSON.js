@@ -31,7 +31,7 @@ var stringifyJSON = function(obj) {
       if (result !== '{') {
         result += ',';
       }
-      result += keys[index].toString() + ' : ' + stringifyJSON(obj[keys[index]]);
+      result += keys[index].toString() + ':' + stringifyJSON(obj[keys[index]]);
     }
 
     return result + '}';
