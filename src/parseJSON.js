@@ -66,8 +66,6 @@ var parseJSON = function(json) {
     tokens.splice(tokens.indexOf(''), 1);
   }
 
-  console.log(tokens);
-
   if (tokens[0] === '[' && tokens[tokens.length-1] === ']') {
     return parseArray(0);
 
