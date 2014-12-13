@@ -5,4 +5,13 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
+  if (obj === undefined || typeof(obj) === 'function') {
+    throw new SyntaxError("invalid JSON");
+  } else if (Array.isArray(obj)) {
+    console.log('array');
+  } else if (typeof(obj) === 'object') {
+    console.log('object');
+  } else {
+    return obj.toString();
+  }
 };
