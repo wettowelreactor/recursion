@@ -20,7 +20,7 @@ var parseJSON = function(json) {
         tokens.splice(index, 1);
       } else {
         results.push(tokens[index]);
-        tokens.splice(index, 1;)
+        tokens.splice(index, 1);
       }
     }
     tokens.splice(index, 1);
