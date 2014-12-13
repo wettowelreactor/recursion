@@ -37,6 +37,10 @@ var stringifyJSON = function(obj) {
     return result + '}';
 
   } else {
-    return '"' + obj.toString() + '"';
+    if (typeof(obj) === 'number' || typeof(obj) === 'boolean') {
+      return obj.toString();
+    } else {
+      return '"' + obj.toString() + '"';
+    }
   }
 };
