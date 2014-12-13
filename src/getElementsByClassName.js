@@ -6,5 +6,20 @@
 // But instead we're going to implement it from scratch:
 var getElementsByClassName = function(className
 ){
-  // your code here
+  var index;
+  var elements = [];
+  var root = arguments[1] ? arguments[1] : document.body;
+  var children = root.childNodes;
+
+  if (root.classList.contains(className)) {
+    elements.push(root);
+  }
+
+  if (children.length > 0) {
+    for (index = 0; index < children.length; index += 1) {
+      elements.concat(getElementsByClassName(className, children[index]));
+    }
+  }
+
+  return elements;
 };
