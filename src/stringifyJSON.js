@@ -8,7 +8,7 @@ var stringifyJSON = function(obj) {
   var index, result, keys;
 
   if (obj === undefined || typeof(obj) === 'function') {
-    throw new SyntaxError("invalid JSON");
+    return;
   } else if (obj === null) {
     return "null";
   } else if (Array.isArray(obj)) {
@@ -28,6 +28,11 @@ var stringifyJSON = function(obj) {
     result = '{';
 
     for (index = 0; index < keys.length; index += 1) {
+      if (obj[keys[index]] === undefined ||
+        typeof(obj[keys[index]]) === 'function') {
+        continue;
+      }
+
       if (result !== '{') {
         result += ',';
       }
