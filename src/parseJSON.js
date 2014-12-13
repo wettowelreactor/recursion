@@ -14,10 +14,11 @@ var parseJSON = function(json) {
     tokens.splice(tokens.indexOf(''), 1);
   }
 
-  if (json[0] === '[' && json[json.length-1] === ']') {
+  if (tokens[0] === '[' && tokens[tokens.length-1] === ']') {
+    console.log('array branch');
 
-  } else if (json[0] === '{' && json[json.length-1] === '}') {
-
+  } else if (tokens[0] === '{' && tokens[tokens.length-1] === '}') {
+    console.log('object branch');
   } else {
     throw new TypeError('invalid JSON');
   }
