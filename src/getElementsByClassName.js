@@ -17,7 +17,8 @@ var getElementsByClassName = function(className
 
   if (children.length > 0) {
     for (index = 0; index < children.length; index += 1) {
-      elements.concat(getElementsByClassName(className, children[index]));
+      elements = elements.concat(getElementsByClassName(
+        className, children[index]));
     }
   }
 
