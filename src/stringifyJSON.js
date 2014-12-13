@@ -5,10 +5,19 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
+  var index, result;
+
   if (obj === undefined || typeof(obj) === 'function') {
     throw new SyntaxError("invalid JSON");
   } else if (Array.isArray(obj)) {
-    console.log('array');
+    result = '[';
+    for(index = 0; index < obj.length; index += 1) {
+        if (result !== '[') {
+            result += ', ';
+        }
+        result += stringifyJSON(obj[index]);
+    }
+    return result + ']';
   } else if (typeof(obj) === 'object') {
     console.log('object');
   } else {
