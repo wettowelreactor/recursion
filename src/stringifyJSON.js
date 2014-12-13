@@ -5,21 +5,35 @@
 
 var stringifyJSON = function(obj) {
   // your code goes here
-  var index, result;
+  var index, result, keys;
 
   if (obj === undefined || typeof(obj) === 'function') {
     throw new SyntaxError("invalid JSON");
   } else if (Array.isArray(obj)) {
     result = '[';
+
     for(index = 0; index < obj.length; index += 1) {
-        if (result !== '[') {
-            result += ', ';
-        }
-        result += stringifyJSON(obj[index]);
+      if (result !== '[') {
+        result += ', ';
+      }
+      result += stringifyJSON(obj[index]);
     }
+
     return result + ']';
+
   } else if (typeof(obj) === 'object') {
-    console.log('object');
+    keys = Object.keys(obj);
+    result = '{';
+
+    for (index = 0; index < keys.length; index += 1) {
+      if (result !== '{') {
+        result += ', ';
+      }
+      result += key.toString() + ' : ' + stringifyJSON(obj[key]);
+    }
+
+    return result + '}';
+
   } else {
     return obj.toString();
   }
