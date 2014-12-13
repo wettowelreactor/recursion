@@ -13,9 +13,9 @@ var parseJSON = function(json) {
     tokens.splice(index, 1);
     while (index < tokens.length && tokens[index] !== ']') {
       if (tokens[index] === '[') {
-        parseArray(index);
+        results.push(parseArray(index));
       } else if (tokens[index] === '{') {
-        pareObject(index);
+        results.push(pareObject(index));
       } else if (tokens[index] === ',') {
         tokens.splice(index, 1);
       } else {
@@ -36,9 +36,9 @@ var parseJSON = function(json) {
     tokens.splice(index, 1);
     while (index < tokens.length && tokens[index] !== '}') {
       if (tokens[index] === '[') {
-        parseArray(index);
+        results[key] = parseArray(index); // assumes key as array cant be a key
       } else if (tokens[index] === '{') {
-        pareObject(index);
+        results[key] = pareObject(index); // assumes key as object cant be a key
       } else if (tokens[index] === ',') {
         key = undefined;
         tokens.splice(index, 1);
@@ -67,10 +67,10 @@ var parseJSON = function(json) {
   }
 
   if (tokens[0] === '[' && tokens[tokens.length-1] === ']') {
-    parseArray(0);
+    return parseArray(0);
 
   } else if (tokens[0] === '{' && tokens[tokens.length-1] === '}') {
-    parseObject(0);
+    return parseObject(0);
 
   } else {
     throw new TypeError('invalid JSON');
