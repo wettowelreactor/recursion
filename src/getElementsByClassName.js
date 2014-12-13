@@ -11,7 +11,7 @@ var getElementsByClassName = function(className
   var root = arguments[1] ? arguments[1] : document.body;
   var children = root.childNodes;
 
-  if (root.classList.contains(className)) {
+  if (root.classList && root.classList.contains(className)) {
     elements.push(root);
   }
 
