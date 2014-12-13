@@ -58,9 +58,6 @@ var parseJSON = function(json) {
     return results;
   };
 
-
-  };
-
   for (index = 0; index < tokens.length; index += 1) {
     tokens[index] = tokens[index].trim();
   }
@@ -70,12 +67,10 @@ var parseJSON = function(json) {
   }
 
   if (tokens[0] === '[' && tokens[tokens.length-1] === ']') {
-    console.log('array branch');
-    //parse array
+    parseArray(0);
 
   } else if (tokens[0] === '{' && tokens[tokens.length-1] === '}') {
-    console.log('object branch');
-    //parseObject
+    parseObject(0);
 
   } else {
     throw new TypeError('invalid JSON');
