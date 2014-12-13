@@ -4,7 +4,7 @@
 // but you're not, so you'll write it from scratch:
 var parseJSON = function(json) {
   var index;
-  var tokens = json.split(/((?:"(?:[^"\\]|\\.)*")|:|,|{|}|[|])/);
+  var tokens = json.split(/((?:"(?:[^"\\]|\\.)*")|:|,|\{|\}|\[|\])/);
 
   var parseArray = function(index) {
     var results = [];
@@ -46,9 +46,9 @@ var parseJSON = function(json) {
         tokens.splice(index, 1);
       } else {
         if (key) {
-          results[key] = token[index];
+          results[key] = tokens[index];
         } else {
-          key = token[index];
+          key = tokens[index];
         }
         tokens.splice(index, 1);
       }
@@ -65,6 +65,8 @@ var parseJSON = function(json) {
   while (tokens.indexOf('') !== -1) {
     tokens.splice(tokens.indexOf(''), 1);
   }
+
+  console.log(tokens);
 
   if (tokens[0] === '[' && tokens[tokens.length-1] === ']') {
     return parseArray(0);
