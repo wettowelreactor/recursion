@@ -28,7 +28,36 @@ var parseJSON = function(json) {
     return results;
   };
 
-  var parseObject = function() {
+  var parseObject = function(index) {
+    var results = {};
+    var key;
+    index = index ? index : 0;
+
+    tokens.splice(index, 1);
+    while (index < tokens.length && tokens[index] !== '}') {
+      if (tokens[index] === '[') {
+        parseArray(index);
+      } else if (tokens[index] === '{') {
+        pareObject(index);
+      } else if (tokens[index] === ',') {
+        key = undefined;
+        tokens.splice(index, 1);
+      } else if (tokens[index] === ':') {
+        tokens.splice(index, 1);
+      } else {
+        if (key) {
+          results[key] = token[index];
+        } else {
+          key = token[index];
+        }
+        tokens.splice(index, 1);
+      }
+    }
+    tokens.splice(index, 1);
+
+    return results;
+  };
+
 
   };
 
