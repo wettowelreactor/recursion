@@ -9,7 +9,7 @@ var parseJSON = function(json) {
   var parseArray = function(index) {
     var results = [];
     index = index ? index : 0;
-
+    console.log(tokens);
     tokens.splice(index, 1);
     while (index < tokens.length && tokens[index] !== ']') {
       if (tokens[index] === '[') {
@@ -19,7 +19,7 @@ var parseJSON = function(json) {
       } else if (tokens[index] === ',') {
         tokens.splice(index, 1);
       } else {
-        results.push(tokens[index]);
+        results.push(parsePrimitive(tokens[index]));
         tokens.splice(index, 1);
       }
     }
@@ -46,9 +46,9 @@ var parseJSON = function(json) {
         tokens.splice(index, 1);
       } else {
         if (key) {
-          results[key] = tokens[index];
+          results[key] = parsePrimitive(tokens[index]);
         } else {
-          key = tokens[index].slice(1,-1);
+          key = parsePrimitive(tokens[index]);
         }
         tokens.splice(index, 1);
       }
@@ -56,6 +56,20 @@ var parseJSON = function(json) {
     tokens.splice(index, 1);
 
     return results;
+  };
+
+  var parsePrimitive = function(primitive) {
+    if(primitive[0] === '"') {
+      return primitive.slice(1,-1);
+    } else if (primitive === 'true') {
+      return true;
+    } else if (primitive === 'false') {
+      return false;
+    } else if (primitive.indexOf('.') === -1) {
+      return parseInt(primitive);
+    } else {
+      return parseFloat(primitive);
+    }
   };
 
   for (index = 0; index < tokens.length; index += 1) {
