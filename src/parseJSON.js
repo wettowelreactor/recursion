@@ -48,7 +48,7 @@ var parseJSON = function(json) {
         if (key) {
           results[key] = tokens[index];
         } else {
-          key = tokens[index];
+          key = tokens[index].slice(1,-1);
         }
         tokens.splice(index, 1);
       }
