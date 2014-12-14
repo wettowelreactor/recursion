@@ -23,6 +23,9 @@ var parseJSON = function(json) {
         tokens.splice(index, 1);
       }
     }
+    if(tokens[index] !== ']') {
+      return;
+    }
     tokens.splice(index, 1);
 
     return results;
@@ -52,6 +55,9 @@ var parseJSON = function(json) {
         }
         tokens.splice(index, 1);
       }
+    }
+    if(tokens[index] !== '}') {
+      return;
     }
     tokens.splice(index, 1);
 
@@ -91,6 +97,6 @@ var parseJSON = function(json) {
     return parseObject(0);
 
   } else {
-    throw new TypeError('invalid JSON');
+    throw new SyntaxError();
   }
 };
