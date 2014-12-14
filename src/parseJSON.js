@@ -60,10 +60,8 @@ var parseJSON = function(json) {
 
   var parsePrimitive = function(primitive) {
     if(primitive[0] === '"') {
-      console.log('preprimitive: ' + primitive);
       primitive = primitive.replace(/\\\\/g, '\\');
       primitive = primitive.replace(/\\"/g, '"');
-      console.log(primitive);
       return primitive.slice(1,-1);
     } else if (primitive === 'true') {
       return true;
