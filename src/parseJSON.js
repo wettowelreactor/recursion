@@ -15,7 +15,7 @@ var parseJSON = function(json) {
       if (tokens[index] === '[') {
         results.push(parseArray(index));
       } else if (tokens[index] === '{') {
-        results.push(pareObject(index));
+        results.push(parseObject(index));
       } else if (tokens[index] === ',') {
         tokens.splice(index, 1);
       } else {
@@ -38,7 +38,7 @@ var parseJSON = function(json) {
       if (tokens[index] === '[') {
         results[key] = parseArray(index); // assumes key as array cant be a key
       } else if (tokens[index] === '{') {
-        results[key] = pareObject(index); // assumes key as object cant be a key
+        results[key] = parseObject(index); // assumes key as object cant be a key
       } else if (tokens[index] === ',') {
         key = undefined;
         tokens.splice(index, 1);
@@ -65,6 +65,8 @@ var parseJSON = function(json) {
       return true;
     } else if (primitive === 'false') {
       return false;
+    } else if (primitive === 'null') {
+      return null;
     } else if (primitive.indexOf('.') === -1) {
       return parseInt(primitive);
     } else {
