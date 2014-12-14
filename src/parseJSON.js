@@ -9,7 +9,7 @@ var parseJSON = function(json) {
   var parseArray = function(index) {
     var results = [];
     index = index ? index : 0;
-    console.log(tokens);
+
     tokens.splice(index, 1);
     while (index < tokens.length && tokens[index] !== ']') {
       if (tokens[index] === '[') {
